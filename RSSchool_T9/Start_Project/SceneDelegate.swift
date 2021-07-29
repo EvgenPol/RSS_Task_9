@@ -17,6 +17,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let _ = scene as? UIWindowScene else {
             fatalError("LOL, be careful, drink some water")
         }
+        self.window = UIWindow(windowScene: scene as! UIWindowScene)
+        
+        let rootVC = TabBarVC.init()
+        
+        self.window?.rootViewController = rootVC
+        self.window?.makeKeyAndVisible()
     }
 }
 
