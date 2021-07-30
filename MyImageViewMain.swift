@@ -10,6 +10,7 @@
 import UIKit
 
 class MyImageViewMain: UIImageView {
+    weak var gradient: CAGradientLayer!
     
     init(img: UIImage, title: String) {
         super.init(image: img)
@@ -61,21 +62,16 @@ class MyImageViewMain: UIImageView {
         ])
      }
      
-   private func addGradiend() {
+    func addGradiend() {
         let colorTop = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0).cgColor
         let colorBottom =  UIColor.init(red: 0, green: 0, blue: 0, alpha: 1).cgColor
         let gradient = CAGradientLayer()
-
+    
         gradient.colors = [colorTop, colorBottom]
         gradient.locations = [0.0, 0.95]
 
-        gradient.frame = self.bounds
-        
-        gradient.frame.origin = CGPoint.init(x: 0, y: 250)
-        gradient.frame.size = CGSize.init(width: 374, height: 250)
-        
-
         self.layer.addSublayer(gradient)
+        self.gradient = gradient
      }
      
      required init?(coder: NSCoder) {

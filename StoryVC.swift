@@ -13,6 +13,8 @@ class StoryVC: DescribingCellVC {
     var colorForPaths: UIColor!
     var turnedTimer: Bool!
     
+    weak var pathsScrollView: PathsScrollView!
+    
     convenience init(data : ContentType, colorPaths: UIColor, turnedTimer: Bool) {
         self.init()
         colorForPaths = colorPaths
@@ -25,34 +27,33 @@ class StoryVC: DescribingCellVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        addPaths()
+        
+        addPathsScrollView()
         addStoryLabel()
+    
         
     }
 
     private func addStoryLabel() {
-        
         let storyText = self.dataStory?.text ?? "Error"
-        
-        let attributedString = NSMutableAttributedString(string: storyText)
-        
+       
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 2
         paragraphStyle.alignment = .left
         paragraphStyle.maximumLineHeight = 29
         paragraphStyle.minimumLineHeight = 29
 
+        let attributedString = NSMutableAttributedString(string: storyText)
         attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, attributedString.length))
         
-        let containerView = UIView.init()
         let storyLabel = UILabel.init()
         storyLabel.attributedText = attributedString
         storyLabel.textColor = UIColor.white
         storyLabel.numberOfLines = 0
-        
         storyLabel.font = UIFont.init(name: "Rockwell", size: 24)
         storyLabel.translatesAutoresizingMaskIntoConstraints = false
         
+        let containerView = UIView.init()
         containerView.layer.cornerRadius = 8
         containerView.layer.borderWidth = 1
         containerView.layer.borderColor = UIColor.white.cgColor
@@ -74,50 +75,22 @@ class StoryVC: DescribingCellVC {
         ])
     }
     
-    private func addPaths() {
-        let viewOne = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 74, height: 61))
-        let viewTwo = UIView.init(frame: CGRect.init(x: 0, y: 0, width: 74, height: 61))
-        
-        
-        viewOne.translatesAutoresizingMaskIntoConstraints = false
-        viewTwo.translatesAutoresizingMaskIntoConstraints = false
-        viewOne.backgroundColor = UIColor.black
-        viewTwo.backgroundColor = UIColor.black
-        
-        let shapeLayerOne = CAShapeLayer.init(layer: viewOne.layer)
-        let shapeLayerTwo = CAShapeLayer.init(layer: viewTwo.layer)
-        
-        shapeLayerOne.path = dataStory?.paths[0]
-        shapeLayerTwo.path = dataStory?.paths[1]
-        
-        shapeLayerOne.strokeColor = UIColor.yellow.cgColor
-        shapeLayerTwo.strokeColor = UIColor.yellow.cgColor
-        
-        shapeLayerOne.borderWidth = 0.5
-        shapeLayerOne.borderColor = UIColor.yellow.cgColor
-        shapeLayerTwo.borderWidth = 0.5
-        shapeLayerTwo.borderColor = UIColor.yellow.cgColor
-        
-        shapeLayerOne.strokeEnd = 1
-        shapeLayerTwo.strokeEnd = 1
-        viewOne.layer.addSublayer(shapeLayerOne)
-        viewTwo.layer.addSublayer(shapeLayerTwo)
-        
-        scrollView.addSubview(viewOne)
-        scrollView.addSubview(viewTwo)
+    private func addPathsScrollView() {
+        let scroll = PathsScrollView.init(paths: dataStory!.paths, color: colorForPaths.cgColor, turnedTimer: turnedTimer)
+        self.pathsScrollView = scroll
+        self.scrollView.addSubview(scroll)
         
         NSLayoutConstraint.activate([
-            viewOne.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 71),
-            viewOne.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 116),
-            viewOne.rightAnchor.constraint(equalTo: viewTwo.leftAnchor, constant: -102),
-            viewOne.widthAnchor.constraint(equalToConstant: 74),
-            viewOne.heightAnchor.constraint(equalToConstant: 61),
-            
-            
-            viewTwo.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 116),
-            viewTwo.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -95),
-//            viewTwo.widthAnchor.constraint(equalToConstant: 74),
-            viewTwo.heightAnchor.constraint(equalToConstant: 61),
+            scroll.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 116),
+            scroll.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+            scroll.rightAnchor.constraint(equalTo: self.view.rightAnchor)
         ])
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        imageView.gradient.frame = imageView.bounds
+        
+    }
+    
 }

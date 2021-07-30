@@ -33,6 +33,9 @@
 		6C5CB38226B2D4CA00611AC1 /* DescribingCellVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5CB38126B2D4CA00611AC1 /* DescribingCellVC.swift */; };
 		6C5CB38626B3161D00611AC1 /* MyImageViewMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5CB38526B3161D00611AC1 /* MyImageViewMain.swift */; };
 		6C5CB38A26B3489B00611AC1 /* StoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5CB38926B3489B00611AC1 /* StoryVC.swift */; };
+		6C5CB38C26B4080300611AC1 /* PathsScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5CB38B26B4080300611AC1 /* PathsScrollView.swift */; };
+		6C5CB38E26B4274A00611AC1 /* GaleryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5CB38D26B4274A00611AC1 /* GaleryVC.swift */; };
+		6C5CB39026B438AD00611AC1 /* PathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5CB38F26B438AC00611AC1 /* PathView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +67,9 @@
 		6C5CB38126B2D4CA00611AC1 /* DescribingCellVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescribingCellVC.swift; sourceTree = "<group>"; };
 		6C5CB38526B3161D00611AC1 /* MyImageViewMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyImageViewMain.swift; sourceTree = "<group>"; };
 		6C5CB38926B3489B00611AC1 /* StoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryVC.swift; sourceTree = "<group>"; };
+		6C5CB38B26B4080300611AC1 /* PathsScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathsScrollView.swift; sourceTree = "<group>"; };
+		6C5CB38D26B4274A00611AC1 /* GaleryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GaleryVC.swift; sourceTree = "<group>"; };
+		6C5CB38F26B438AC00611AC1 /* PathView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +95,9 @@
 				6C5CB37F26B2D30400611AC1 /* MyNavigationController.swift */,
 				6C5CB38126B2D4CA00611AC1 /* DescribingCellVC.swift */,
 				6C5CB38926B3489B00611AC1 /* StoryVC.swift */,
+				6C5CB38D26B4274A00611AC1 /* GaleryVC.swift */,
+				6C5CB38F26B438AC00611AC1 /* PathView.swift */,
+				6C5CB38B26B4080300611AC1 /* PathsScrollView.swift */,
 				2BB9E75926AB605700112651 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -272,13 +281,16 @@
 				2BB9F30126AF557E00F43852 /* story-2-path.swift in Sources */,
 				2BB9E75C26AB605700112651 /* AppDelegate.swift in Sources */,
 				6C5CB38626B3161D00611AC1 /* MyImageViewMain.swift in Sources */,
+				6C5CB38E26B4274A00611AC1 /* GaleryVC.swift in Sources */,
 				2BB9F30B26AF5EEC00F43852 /* story-3-path.swift in Sources */,
 				2BB9F29126ADFAF100F43852 /* Data.swift in Sources */,
+				6C5CB38C26B4080300611AC1 /* PathsScrollView.swift in Sources */,
 				6C5CB38026B2D30400611AC1 /* MyNavigationController.swift in Sources */,
 				6C5CB37626B0B57700611AC1 /* TabBarVC.swift in Sources */,
 				2BB9F2EC26AF1F6200F43852 /* story-1-path.swift in Sources */,
 				2BB9F30E26AF5FA900F43852 /* story-4-path.swift in Sources */,
 				2BB9E75E26AB605700112651 /* SceneDelegate.swift in Sources */,
+				6C5CB39026B438AD00611AC1 /* PathView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

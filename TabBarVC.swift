@@ -7,6 +7,11 @@
 // 
 // Copyright © 2021 RSSchool. All rights reserved.
 
+
+//отредактировать градиент в стори и атеймс
+//возможно? оптимизировать стори пути
+//создать кастомное стори лабел
+
 import UIKit
 
 class TabBarVC: UITabBarController  {

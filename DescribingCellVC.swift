@@ -42,10 +42,10 @@ class DescribingCellVC: UIViewController {
         scrollView = scroll
         self.view.addSubview(scroll)
         NSLayoutConstraint.activate([
-            scroll.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),
-            scroll.topAnchor.constraint(equalTo: view.topAnchor, constant: 8),
-            scroll.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0),
-            scroll.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
+            scroll.leftAnchor.constraint(equalTo: view.leftAnchor),
+            scroll.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scroll.rightAnchor.constraint(equalTo: view.rightAnchor),
+            scroll.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
     
@@ -64,12 +64,12 @@ class DescribingCellVC: UIViewController {
         close.addGestureRecognizer(gestureForClose)
         close.isUserInteractionEnabled = true
         
-        scrollView?.addSubview(close)
+        scrollView.addSubview(close)
        
         NSLayoutConstraint.activate([
             close.heightAnchor.constraint(equalToConstant: 40.0),
             close.widthAnchor.constraint(equalToConstant: 40.0),
-            close.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 30),
+            close.topAnchor.constraint(equalTo: scrollView.topAnchor),
             close.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -25)
         ])
     }
@@ -84,7 +84,7 @@ class DescribingCellVC: UIViewController {
         
         NSLayoutConstraint.activate([
             imageView.leftAnchor.constraint(equalTo: scrollView!.leftAnchor, constant: 20),
-            imageView.topAnchor.constraint(equalTo: scrollView!.topAnchor, constant: 100),
+            imageView.topAnchor.constraint(equalTo: scrollView!.topAnchor, constant: 70),
             imageView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -20),
             imageView.heightAnchor.constraint(equalToConstant: 500),
         ])
@@ -109,7 +109,7 @@ class DescribingCellVC: UIViewController {
         NSLayoutConstraint.activate([
             subtitle.widthAnchor.constraint(equalToConstant: 122),
             subtitle.heightAnchor.constraint(equalToConstant: 44),
-            subtitle.centerXAnchor.constraint(equalTo: scrollView!.centerXAnchor, constant: 0),
+            subtitle.centerXAnchor.constraint(equalTo: scrollView!.centerXAnchor),
             subtitle.centerYAnchor.constraint(equalTo: imageView!.bottomAnchor)
         ])
     }
@@ -138,7 +138,6 @@ class DescribingCellVC: UIViewController {
 
 extension DescribingCellVC: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print(1)
         if scrollView.contentOffset.x != 0 {
                 scrollView.contentOffset.x = 0
         }

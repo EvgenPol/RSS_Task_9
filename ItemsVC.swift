@@ -93,9 +93,9 @@ extension ItemsVC: CellForDataDelegate {
         let describingCellViewController: DescribingCellVC!
         switch cell.data {
         case .gallery:
-            describingCellViewController = StoryVC.init(data: cell.data, colorPaths: UIColor.init(named: "#F3AF22")!, turnedTimer: true)
+            describingCellViewController = StoryVC.init(data: cell.data, colorPaths: UIColor.init(named: "#F3AF22")!, turnedTimer: false)
         case .story:
-            describingCellViewController = StoryVC.init(data: cell.data, colorPaths: UIColor.init(named: "#F3AF22")!, turnedTimer: true)
+            describingCellViewController = StoryVC.init(data: cell.data, colorPaths: UIColor.init(named: "#F3AF22")!, turnedTimer: false)
         case .none:
             describingCellViewController = DescribingCellVC.init(data: cell.data)
         }
