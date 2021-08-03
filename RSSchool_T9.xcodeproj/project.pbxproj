@@ -38,7 +38,7 @@
 		6C5CB37426B0B11C00611AC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C5CB37326B0B11B00611AC1 /* Assets.xcassets */; };
 		6C5CB37626B0B57700611AC1 /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5CB37526B0B57700611AC1 /* TabBarVC.swift */; };
 		6C5CB37826B168F800611AC1 /* CellForData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5CB37726B168F800611AC1 /* CellForData.swift */; };
-		6C5CB37A26B16C5600611AC1 /* ItemsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5CB37926B16C5600611AC1 /* ItemsVC.swift */; };
+		6C5CB37A26B16C5600611AC1 /* ItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5CB37926B16C5600611AC1 /* ItemsViewController.swift */; };
 		6C5CB37C26B1D7F600611AC1 /* ImageViewForCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5CB37B26B1D7F600611AC1 /* ImageViewForCell.swift */; };
 		6C5CB38226B2D4CA00611AC1 /* UCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5CB38126B2D4CA00611AC1 /* UCViewController.swift */; };
 		6C5CB38626B3161D00611AC1 /* UCMainImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C5CB38526B3161D00611AC1 /* UCMainImageView.swift */; };
@@ -85,7 +85,7 @@
 		6C5CB37326B0B11B00611AC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6C5CB37526B0B57700611AC1 /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
 		6C5CB37726B168F800611AC1 /* CellForData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellForData.swift; sourceTree = "<group>"; };
-		6C5CB37926B16C5600611AC1 /* ItemsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsVC.swift; sourceTree = "<group>"; };
+		6C5CB37926B16C5600611AC1 /* ItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsViewController.swift; sourceTree = "<group>"; };
 		6C5CB37B26B1D7F600611AC1 /* ImageViewForCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewForCell.swift; sourceTree = "<group>"; };
 		6C5CB38126B2D4CA00611AC1 /* UCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UCViewController.swift; sourceTree = "<group>"; };
 		6C5CB38526B3161D00611AC1 /* UCMainImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UCMainImageView.swift; sourceTree = "<group>"; };
@@ -132,8 +132,8 @@
 			isa = PBXGroup;
 			children = (
 				6C5CB37226B0B0A500611AC1 /* Start_Project */,
-				6C5CB37526B0B57700611AC1 /* TabBarVC.swift */,
 				6C5CB39F26B4A31F00611AC1 /* RSSchool_T9-Bridging-Header.h */,
+				6C5CB37526B0B57700611AC1 /* TabBarVC.swift */,
 				6C5CB39326B466C300611AC1 /* Items */,
 				6C5CB3A326B4A32600611AC1 /* Settings */,
 				6C5CB39426B466EC00611AC1 /* UnwrappedCell */,
@@ -253,9 +253,9 @@
 		6C5CB39326B466C300611AC1 /* Items */ = {
 			isa = PBXGroup;
 			children = (
-				6C5CB37926B16C5600611AC1 /* ItemsVC.swift */,
-				6C5CB37B26B1D7F600611AC1 /* ImageViewForCell.swift */,
+				6C5CB37926B16C5600611AC1 /* ItemsViewController.swift */,
 				6C5CB37726B168F800611AC1 /* CellForData.swift */,
+				6C5CB37B26B1D7F600611AC1 /* ImageViewForCell.swift */,
 			);
 			path = Items;
 			sourceTree = "<group>";
@@ -407,7 +407,7 @@
 				6C5CB38226B2D4CA00611AC1 /* UCViewController.swift in Sources */,
 				6C2E37A626B7F6980063DEF6 /* SCollectionView.swift in Sources */,
 				6C5CB3A226B4A32000611AC1 /* SettingsVC.m in Sources */,
-				6C5CB37A26B16C5600611AC1 /* ItemsVC.swift in Sources */,
+				6C5CB37A26B16C5600611AC1 /* ItemsViewController.swift in Sources */,
 				6C5CB3AA26B594DB00611AC1 /* ColorListTableVC.m in Sources */,
 				6C5CB39C26B4800500611AC1 /* UCCloseLabel.swift in Sources */,
 				6C5CB37C26B1D7F600611AC1 /* ImageViewForCell.swift in Sources */,

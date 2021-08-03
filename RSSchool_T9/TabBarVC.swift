@@ -7,21 +7,15 @@
 // 
 // Copyright © 2021 RSSchool. All rights reserved.
 
-
-//отредактировать градиент в стори и атеймс
-//возможно? оптимизировать стори пути или сделать коллекцию
-//создать кастомное стори лабел
-//баг яблок
-
 import UIKit
 
 class TabBarVC: UITabBarController  {
-    weak var itemsController: ItemsVC?
+    weak var itemsController: ItemsViewController?
     weak var settingController: SettingsVC?
     
     override func viewDidLoad() {
         
-        let itemsVC = ItemsVC.init()
+        let itemsVC = ItemsViewController.init()
         let settingsVC = SettingsVC.init()
         
         itemsController = itemsVC

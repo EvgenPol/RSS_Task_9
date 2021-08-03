@@ -9,7 +9,7 @@
 
 import UIKit
 
-class ItemsVC: UIViewController {
+class ItemsViewController: UIViewController {
     weak var scrollView: UIScrollView!
     var arrayStackView: [UIStackView] = []
     var arrayCellView: [CellForData] = []
@@ -42,7 +42,6 @@ class ItemsVC: UIViewController {
             scrollView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor)
         ])
         
-    
         stackOneConstraintsPortrait = [
             arrayStackView[0].leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor),
             arrayStackView[0].topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 8.0),
@@ -130,7 +129,7 @@ class ItemsVC: UIViewController {
     
 }
 
-extension ItemsVC: CellForDataDelegate {
+extension ItemsViewController: CellForDataDelegate {
     func touchCell(from cell: CellForData) {
         let describingCellViewController: UCViewController!
         switch cell.data {
