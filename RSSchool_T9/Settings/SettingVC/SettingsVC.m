@@ -37,8 +37,8 @@
     _turnedTimer = YES;
     
     self.dataSource = @[
-        @"Timer",
-        @"Color"
+        @"Draw stories",
+        @"Stroke color"
     ];
     
     
@@ -47,8 +47,8 @@
     table.translatesAutoresizingMaskIntoConstraints = NO;
     [table setDataSource: (id<UITableViewDataSource>) self];
     [table setDelegate: (id<UITableViewDelegate>) self];
-    [table registerClass:UITableViewCell.class forCellReuseIdentifier:@"Timer"];
-    [table registerClass:TableCellForColor.class forCellReuseIdentifier:@"Color"];
+    [table registerClass:UITableViewCell.class forCellReuseIdentifier:@"Draw stories"];
+    [table registerClass:TableCellForColor.class forCellReuseIdentifier:@"Stroke color"];
     [self.view addSubview:table];
     self.tableView = table;
     
@@ -105,11 +105,11 @@
     
     UITableViewCell *cell;
 
-    if ([_dataSource[indexPath.row] isEqualToString:@"Timer"]) {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"Timer"];
+    if ([_dataSource[indexPath.row] isEqualToString:@"Draw stories"]) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"Draw stories"];
         cell.accessoryView = [self returnSwitchForTimer];
     } else {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"Color"];
+        cell = [tableView dequeueReusableCellWithIdentifier:@"Stroke color"];
         
         NSString *color = _listOfColor.selectedColor;
         (color == nil) ? (cell.detailTextLabel.text = @"#f3af22") : (cell.detailTextLabel.text = color);
@@ -128,7 +128,7 @@
 //Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if ([_dataSource[indexPath.row] isEqualToString:@"Color"]) {
+    if ([_dataSource[indexPath.row] isEqualToString:@"Stroke color"]) {
         ColorListTableVC *vc;
         if (_listOfColor == nil) {
            vc = [[ColorListTableVC alloc] initWithStyle:UITableViewStyleInsetGrouped];

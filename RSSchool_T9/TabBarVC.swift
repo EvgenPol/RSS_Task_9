@@ -37,10 +37,14 @@ class TabBarVC: UITabBarController  {
         
         itemsVC.navigationController?.setNavigationBarHidden(true, animated: false)
         settingsVC.navigationItem.title = "Settings"
+        settingsVC.navigationController?.navigationBar.tintColor = UIColor.init(named: "#FF0000")
+        
+        UITabBar.appearance().tintColor = UIColor.init(named: "#FF0000")
     }
     
     private func addTabBarItems(itemsVC : UIViewController, settingsVC: UIViewController) {
         itemsVC.tabBarItem = UITabBarItem.init(title: "Items", image: UIImage.init(systemName: "rectangle.grid.2x2"), tag: 0)
         settingsVC.tabBarItem = UITabBarItem.init(title: "Settings", image: UIImage.init(systemName: "gear"), tag: 1)
+    
     }
 }

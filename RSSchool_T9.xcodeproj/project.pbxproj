@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		2BB9E75C26AB605700112651 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9E75B26AB605700112651 /* AppDelegate.swift */; };
 		2BB9E75E26AB605700112651 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9E75D26AB605700112651 /* SceneDelegate.swift */; };
-		2BB9E76326AB605700112651 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BB9E76126AB605700112651 /* Main.storyboard */; };
 		2BB9E76826AB605900112651 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BB9E76626AB605900112651 /* LaunchScreen.storyboard */; };
 		2BB9F29126ADFAF100F43852 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB9F29026ADFAF100F43852 /* Data.swift */; };
 		2BB9F29526AE01A300F43852 /* s1-title.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2BB9F29426AE01A300F43852 /* s1-title.txt */; };
@@ -56,7 +55,6 @@
 		2BB9E75826AB605700112651 /* RSSchool_T9.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RSSchool_T9.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BB9E75B26AB605700112651 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2BB9E75D26AB605700112651 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		2BB9E76226AB605700112651 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2BB9E76726AB605900112651 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2BB9E76926AB605900112651 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = RSSchool_T9/Start_Project/Info.plist; sourceTree = SOURCE_ROOT; };
 		2BB9F29026ADFAF100F43852 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
@@ -135,10 +133,10 @@
 			children = (
 				6C5CB37226B0B0A500611AC1 /* Start_Project */,
 				6C5CB37526B0B57700611AC1 /* TabBarVC.swift */,
-				6C5CB3A326B4A32600611AC1 /* Settings */,
-				6C5CB39326B466C300611AC1 /* Items */,
-				6C5CB39426B466EC00611AC1 /* UnwrappedCell */,
 				6C5CB39F26B4A31F00611AC1 /* RSSchool_T9-Bridging-Header.h */,
+				6C5CB39326B466C300611AC1 /* Items */,
+				6C5CB3A326B4A32600611AC1 /* Settings */,
+				6C5CB39426B466EC00611AC1 /* UnwrappedCell */,
 			);
 			path = RSSchool_T9;
 			sourceTree = "<group>";
@@ -245,7 +243,6 @@
 				2BB9F28F26ADFAEB00F43852 /* Data */,
 				2BB9E75B26AB605700112651 /* AppDelegate.swift */,
 				6C5CB37326B0B11B00611AC1 /* Assets.xcassets */,
-				2BB9E76126AB605700112651 /* Main.storyboard */,
 				2BB9E76626AB605900112651 /* LaunchScreen.storyboard */,
 				2BB9E76926AB605900112651 /* Info.plist */,
 				2BB9E75D26AB605700112651 /* SceneDelegate.swift */,
@@ -394,7 +391,6 @@
 				6C2E37C226B84FAF0063DEF6 /* download.svg in Resources */,
 				2BB9F30226AF57B500F43852 /* s2-text.txt in Resources */,
 				6C2E37BF26B84FA90063DEF6 /* 123_.svg in Resources */,
-				2BB9E76326AB605700112651 /* Main.storyboard in Resources */,
 				6C2E37B726B847A90063DEF6 /* s5-title.txt in Resources */,
 				2BB9F29726AE01B800F43852 /* s1-text.txt in Resources */,
 				6C2E37B526B8457D0063DEF6 /* s5-text.txt in Resources */,
@@ -439,14 +435,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		2BB9E76126AB605700112651 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2BB9E76226AB605700112651 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		2BB9E76626AB605900112651 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

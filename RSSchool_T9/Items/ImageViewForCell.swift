@@ -11,8 +11,8 @@ import UIKit
 
 class ImageViewForCell: UIImageView {
     private weak var gradient : CAGradientLayer!
+    private weak var titleLabel : UILabel!
     private var constraintsPortrait : [NSLayoutConstraint] = []
-    private weak var titleLabel : UILabel?
     
     init(_ img: UIImage, _ title: String, _ type: String) {
         super.init(image: img)
@@ -28,24 +28,22 @@ class ImageViewForCell: UIImageView {
         addLabels(title, type)
     }
     
+    
     private func addLabels(_ title: String, _ type: String) {
         let titleLabel = UILabel.init()
         let subtitleLabel = UILabel.init()
     
         titleLabel.text = title
-        subtitleLabel.text = type
-        self.titleLabel = titleLabel
-       
-        
         titleLabel.font = UIFont.init(name: "Rockwell", size: 16)
         titleLabel.textColor = UIColor.white
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
+        subtitleLabel.text = type
         subtitleLabel.font = UIFont.init(name: "Rockwell", size: 12)
         subtitleLabel.textColor = UIColor.init(named: "#B6B6B6")
-        
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
         
+        self.titleLabel = titleLabel
         self.addSubview(titleLabel)
         self.addSubview(subtitleLabel)
         
@@ -56,7 +54,6 @@ class ImageViewForCell: UIImageView {
         
         let subtitleBottomLandscapeConstrait = subtitleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -1)
         subtitleBottomLandscapeConstrait.priority = UILayoutPriority.init(999)
-        
         
         constraintsPortrait = [
             titleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -30),
@@ -92,16 +89,15 @@ class ImageViewForCell: UIImageView {
         if UIDevice.current.orientation.isPortrait {
             constraintsPortrait.forEach { $0.isActive = true }
             gradient.frame.size = CGSize.init(width: (height/4) * 0.8, height: height / 4)
-            titleLabel?.font = UIFont.init(name: "Rockwell", size: 16)
+            titleLabel.font = UIFont.init(name: "Rockwell", size: 16)
         } else {
             constraintsPortrait.forEach { $0.isActive = false }
             gradient.frame.size = CGSize.init(width: width / 2.5, height: width / 2.5)
-            titleLabel?.font = UIFont.init(name: "Rockwell", size: 13)
+            titleLabel.font = UIFont.init(name: "Rockwell", size: 14)
         }
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
+        fatalError("init(coder:) has not been implemented")
     }
-
 }

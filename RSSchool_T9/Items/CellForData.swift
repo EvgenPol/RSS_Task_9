@@ -14,10 +14,9 @@ protocol CellForDataDelegate: AnyObject {
 }
 
 class CellForData: UIView {
+    var data: ContentType!
     weak var delegate: CellForDataDelegate?
     weak var imageView: ImageViewForCell!
-    var data: ContentType!
-    
     private var constraintsPortrait: [NSLayoutConstraint] = []
     
     static var id = 0
@@ -40,18 +39,10 @@ class CellForData: UIView {
         self.imageView = imageView
         imageView.isUserInteractionEnabled = true
         
-        NSLayoutConstraint.activate([
-            imageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8),
-            imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
-            imageView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -8),
-            imageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10)
-        ])
-        
     }
         
     init() {
         super.init(frame: CGRect.zero)
-       
         layer.cornerRadius = 18
         layer.borderWidth = 1
         layer.borderColor = UIColor.black.cgColor
@@ -60,9 +51,8 @@ class CellForData: UIView {
         data = FillingData.data[CellForData.id]
         CellForData.id += 1
         
-        createConstraits()
         createStuff()
-        
+        createConstraits()
     }
     
     required init?(coder: NSCoder) {
@@ -74,21 +64,26 @@ class CellForData: UIView {
         let screenHeight = max(screenSize.width, screenSize.height)
         let screenWidth = min(screenSize.width, screenSize.height)
     
-        let heightLandscape =  self.heightAnchor.constraint(equalToConstant: screenWidth / 2.5)
+        let heightLandscape =  heightAnchor.constraint(equalToConstant: screenWidth / 2.5)
         heightLandscape.priority = UILayoutPriority.init(998)
-        heightLandscape.isActive = true
         
-        let widthLandscape = self.widthAnchor.constraint(equalToConstant: (screenWidth / 2.5))
+        let widthLandscape = widthAnchor.constraint(equalToConstant: (screenWidth / 2.5))
         widthLandscape.priority = UILayoutPriority.init(998)
-        widthLandscape.isActive = true
         
-        let heightPortrait =  self.heightAnchor.constraint(equalToConstant: screenHeight / 4)
+        let heightPortrait =  heightAnchor.constraint(equalToConstant: screenHeight / 4)
         heightPortrait.priority = UILayoutPriority.init(999)
-        heightPortrait.isActive = true
         
-        let widthPortrait = self.widthAnchor.constraint(equalToConstant: ((screenHeight / 4) * 0.8) )
+        let widthPortrait = widthAnchor.constraint(equalToConstant: ((screenHeight / 4) * 0.8) )
         widthPortrait.priority = UILayoutPriority.init(999)
-        widthPortrait.isActive = true
+    
+        NSLayoutConstraint.activate([
+            widthPortrait, heightPortrait, widthLandscape, heightLandscape,
+            
+            imageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8),
+            imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
+            imageView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -8),
+            imageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10)
+        ])
         
         constraintsPortrait = [ heightPortrait, widthPortrait ]
     }
@@ -96,6 +91,7 @@ class CellForData: UIView {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let locationPoint = touches.first?.location(in: self) else { return }
         let viewPonit = self.imageView.convert(locationPoint, from: self)
+        
         if self.imageView.point(inside: viewPonit, with: event) {
             delegate?.touchCell(from: self)
         }

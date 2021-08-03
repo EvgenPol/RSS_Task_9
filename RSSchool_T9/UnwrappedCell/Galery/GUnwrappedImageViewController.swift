@@ -63,7 +63,7 @@ class GUnwrappedImageViewController: UIViewController {
             close.heightAnchor.constraint(equalToConstant: 40.0),
             close.widthAnchor.constraint(equalToConstant: 40.0),
             close.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
-            close.rightAnchor.constraint(equalTo: self.view.layoutMarginsGuide.rightAnchor)
+            close.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor)
         ])
     }
     
@@ -84,8 +84,8 @@ class GUnwrappedImageViewController: UIViewController {
         NSLayoutConstraint.activate([
             image.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             image.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
-            image.widthAnchor.constraint(equalToConstant: screenSize.width),
-            image.heightAnchor.constraint(equalToConstant: screenSize.height/2)
+            image.widthAnchor.constraint(equalToConstant: screenSize.width - 16),
+            image.heightAnchor.constraint(equalToConstant: screenSize.height/2 - 16)
         ])
     }
     

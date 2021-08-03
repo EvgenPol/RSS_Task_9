@@ -27,12 +27,11 @@ class ItemsVC: UIViewController {
         scroll.showsHorizontalScrollIndicator = false
         scroll.translatesAutoresizingMaskIntoConstraints = false
         scrollView = scroll
-        self.view.addSubview(scroll)
-        self.view.backgroundColor = UIColor.white
+        view.addSubview(scroll)
+        view.backgroundColor = UIColor.white
     
         createStackViews()
         createConstraints()
-        
     }
     
     private func createConstraints() {
@@ -124,7 +123,6 @@ class ItemsVC: UIViewController {
     }
     
     override func viewWillLayoutSubviews() {
-        print("Will")
         arrayCellView.forEach { $0.updateOrientation() }
         updateOrientation()
         startOrientation = UIDevice.current.orientation

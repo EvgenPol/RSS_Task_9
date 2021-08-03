@@ -15,6 +15,8 @@
 
 @end
 
+
+
 @implementation ColorListTableVC
 
 - (void)viewDidLoad {
@@ -53,7 +55,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Color" forIndexPath:indexPath];
     cell.textLabel.text = _dataSource[indexPath.row];
     cell.textLabel.textColor = [UIColor colorNamed: _dataSource[indexPath.row]];
-    cell.tintColor = UIColor.redColor;
+    cell.tintColor = [UIColor colorNamed:@"#FF0000"];
 
     if ([cell.textLabel.text  isEqualToString:_selectedColor]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
