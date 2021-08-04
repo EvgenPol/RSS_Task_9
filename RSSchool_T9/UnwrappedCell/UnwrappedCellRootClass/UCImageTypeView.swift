@@ -9,7 +9,7 @@
 
 import UIKit
 
-class UCTitleMainImage: UIView {
+class UCImageTypeView: UIView {
 
      init(frame: CGRect, text: String) {
         super.init(frame: frame)

@@ -10,18 +10,18 @@
 import UIKit
 
 class SViewController: UCViewController {
-    var colorPaths: UIColor!
-    var turnedTimer: Bool!
+    private var colorPaths: UIColor!
+    private var turnedTimer: Bool!
+    private var originOrientaton: UIDeviceOrientation!
     
-    weak var pathsCollection: SCollectionView!
-    var constraintCollectionPortrait : [NSLayoutConstraint] = []
-    var constraintCollectionLandscape : [NSLayoutConstraint] = []
-    
-    var originOrientaton: UIDeviceOrientation!
+    private weak var pathsCollection: SCollectionView!
+    private var constraintCollectionPortrait : [NSLayoutConstraint] = []
+    private var constraintCollectionLandscape : [NSLayoutConstraint] = []
     
     convenience init(data : ContentType, colorForPaths: String?, turnedTimer: Bool?, _ orientation: UIDeviceOrientation ) {
         self.init()
-        originOrientaton = orientation
+        self.originOrientaton = orientation
+        self.turnedTimer = turnedTimer
     
         if let color = colorForPaths {
             self.colorPaths = UIColor.init(named: color)
@@ -29,13 +29,10 @@ class SViewController: UCViewController {
             self.colorPaths = UIColor.init(named: "#f3af22")
         }
         
-        self.turnedTimer = turnedTimer
-        
         switch data {
             case .gallery(let gallery): dataGallery = gallery
             case .story(let story): dataStory = story
         }
-       
     }
 
     override func viewDidLoad() {
@@ -44,6 +41,8 @@ class SViewController: UCViewController {
         addStoryLabel()
         newnOrientation(originOrientaton)
     }
+    
+    //MARK: Stuff ↓
     
     private func addStoryLabel() {
         let storyText = self.dataStory?.text ?? "Error"
@@ -102,11 +101,12 @@ class SViewController: UCViewController {
     }
     
     
+    //MARK: response to changing the screen orientation ↓
+    
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         newnOrientation(nil)
     }
-    
-    
+
     private func newnOrientation (_ orientation : UIDeviceOrientation?) {
         let orient = orientation ?? UIDevice.current.orientation
         if (orient.isPortrait) {
@@ -117,5 +117,4 @@ class SViewController: UCViewController {
             constraintCollectionLandscape.forEach { $0.isActive = true }
         }
     }
-   
 }

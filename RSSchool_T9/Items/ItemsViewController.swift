@@ -10,63 +10,33 @@
 import UIKit
 
 class ItemsViewController: UIViewController {
-    weak var scrollView: UIScrollView!
-    var arrayStackView: [UIStackView] = []
-    var arrayCellView: [CellForData] = []
+    private weak var scrollView: UIScrollView!
+    private var arrayStackView: [UIStackView] = []
+    private var arrayCellView: [CellForData] = []
     
-    var stackOneConstraintsPortrait: [NSLayoutConstraint] = []
-    var stackTwoConstraintsPortrait: [NSLayoutConstraint] = []
-    var stackOneConstraintsLandscape: [NSLayoutConstraint] = []
-    var stackTwoConstraintsLandscape: [NSLayoutConstraint] = []
+    private var stackOneConstraintsPortrait: [NSLayoutConstraint] = []
+    private var stackTwoConstraintsPortrait: [NSLayoutConstraint] = []
+    private var stackOneConstraintsLandscape: [NSLayoutConstraint] = []
+    private var stackTwoConstraintsLandscape: [NSLayoutConstraint] = []
     
     private var startOrientation = UIDeviceOrientation.unknown
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let scroll = UIScrollView.init(frame: self.view.bounds)
+        
+        let scroll = UIScrollView.init(frame: view.bounds)
         scroll.showsHorizontalScrollIndicator = false
         scroll.translatesAutoresizingMaskIntoConstraints = false
         scrollView = scroll
+        
         view.addSubview(scroll)
         view.backgroundColor = UIColor.white
     
         createStackViews()
         createConstraints()
     }
-    
-    private func createConstraints() {
-        NSLayoutConstraint.activate([
-            scrollView.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor),
-            scrollView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
-            scrollView.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor)
-        ])
-        
-        stackOneConstraintsPortrait = [
-            arrayStackView[0].leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor),
-            arrayStackView[0].topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 8.0),
-            arrayStackView[0].bottomAnchor.constraint(equalTo: scrollView!.bottomAnchor, constant: -50.0)]
-        
-        stackTwoConstraintsPortrait = [
-            arrayStackView[1].topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 8.0),
-            arrayStackView[1].rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor),
-            arrayStackView[1].bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -50.0)
-        ]
-        
-        stackOneConstraintsLandscape = [
-            arrayStackView[0].leftAnchor.constraint(equalTo: scrollView.leftAnchor),
-            arrayStackView[0].topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
-            arrayStackView[0].rightAnchor.constraint(equalTo: scrollView.rightAnchor),
-            
-        ]
-       
-        stackTwoConstraintsLandscape = [
-            arrayStackView[1].leftAnchor.constraint(equalTo: scrollView.leftAnchor),
-            arrayStackView[1].bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
-            arrayStackView[1].rightAnchor.constraint(equalTo: scrollView.rightAnchor),
-        ]
-    }
-    
+
+    //MARK: Stuff
     private func createStackViews() {
         var arrayViewForStackNumberOne = [CellForData]()
         var arrayViewForStackNumberTwo = [CellForData]()
@@ -85,7 +55,7 @@ class ItemsViewController: UIViewController {
         let stackViewOne = UIStackView.init(arrangedSubviews: arrayViewForStackNumberOne)
         let stackViewTwo = UIStackView.init(arrangedSubviews: arrayViewForStackNumberTwo)
         
-        self.arrayStackView = [stackViewOne, stackViewTwo]
+        arrayStackView = [stackViewOne, stackViewTwo]
         
         for stack in arrayStackView {
             stack.translatesAutoresizingMaskIntoConstraints = false
@@ -93,6 +63,40 @@ class ItemsViewController: UIViewController {
             self.scrollView.addSubview(stack)
         }
     }
+    
+    //MARK: Constraints
+    private func createConstraints() {
+        NSLayoutConstraint.activate([
+            scrollView.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
+            scrollView.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor)
+        ])
+    
+        stackOneConstraintsPortrait = [
+            arrayStackView[0].leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor),
+            arrayStackView[0].topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 8.0),
+            arrayStackView[0].bottomAnchor.constraint(equalTo: scrollView!.bottomAnchor, constant: -50.0)
+        ]
+        stackTwoConstraintsPortrait = [
+            arrayStackView[1].topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 8.0),
+            arrayStackView[1].rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor),
+            arrayStackView[1].bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -50.0)
+        ]
+        stackOneConstraintsLandscape = [
+            arrayStackView[0].leftAnchor.constraint(equalTo: scrollView.leftAnchor),
+            arrayStackView[0].topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
+            arrayStackView[0].rightAnchor.constraint(equalTo: scrollView.rightAnchor),
+            
+        ]
+        stackTwoConstraintsLandscape = [
+            arrayStackView[1].leftAnchor.constraint(equalTo: scrollView.leftAnchor),
+            arrayStackView[1].bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
+            arrayStackView[1].rightAnchor.constraint(equalTo: scrollView.rightAnchor),
+        ]
+    }
+    
+    //MARK: response to changing the screen orientation ↓
     
     private func updateOrientation() {
         if UIDevice.current.orientation == .portrait {
@@ -126,31 +130,36 @@ class ItemsViewController: UIViewController {
         updateOrientation()
         startOrientation = UIDevice.current.orientation
     }
-    
 }
 
+
+//MARK: subscribing on the CellForDataDelegate
 extension ItemsViewController: CellForDataDelegate {
+    
     func touchCell(from cell: CellForData) {
-        let describingCellViewController: UCViewController!
+        let unwrappedCellVC: UCViewController!
         switch cell.data {
         
         case .gallery:
-            describingCellViewController = GViewController.init(data: cell.data)
+            unwrappedCellVC = GViewController.init(data: cell.data)
             
         case .story:
-            let color = (self.tabBarController as? TabBarVC)?.settingController?.listOfColor?.selectedColor
-            if (((self.tabBarController as? TabBarVC)?.settingController?.isViewLoaded) == true) {
-                let timer = (self.tabBarController as? TabBarVC)?.settingController?.turnedTimer
-                describingCellViewController = SViewController.init(data: cell.data, colorForPaths: color , turnedTimer: timer, startOrientation)
-            } else {
-                describingCellViewController = SViewController.init(data: cell.data, colorForPaths: color , turnedTimer: true, startOrientation)
-            }
+            let settings = (self.tabBarController as? TabBarVC)?.settingController
+            let color = settings?.listOfColor?.selectedColor
             
-        case .none:
-            describingCellViewController = UCViewController.init(data: cell.data)
+            if (settings?.isViewLoaded == true) {
+                unwrappedCellVC = SViewController.init(data: cell.data,
+                                                       colorForPaths: color,
+                                                       turnedTimer: settings?.turnedTimer,
+                                                       startOrientation)
+            } else {
+                unwrappedCellVC = SViewController.init(data: cell.data,
+                                                       colorForPaths: color,
+                                                       turnedTimer: true,
+                                                       startOrientation)
+            }
         }
-        
-        describingCellViewController.modalPresentationStyle = .fullScreen
-        present(describingCellViewController, animated: true, completion: nil)
+        unwrappedCellVC.modalPresentationStyle = .fullScreen
+        present(unwrappedCellVC, animated: true, completion: nil)
     }
 }

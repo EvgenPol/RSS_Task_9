@@ -10,8 +10,7 @@
 import UIKit
 
 class UCMainImageView: UIImageView {
-    weak var gradient: CAGradientLayer!
-    
+  
     init(img: UIImage, title: String, size: CGSize) {
         super.init(image: img)
         translatesAutoresizingMaskIntoConstraints = false
@@ -25,8 +24,14 @@ class UCMainImageView: UIImageView {
         addGradiend(with: size)
         addImageTitle(title)
      }
-     
-      func addImageTitle(_ title: String) {
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: Stuff ↓
+
+    func addImageTitle(_ title: String) {
         let attributedString = NSMutableAttributedString(string: "")
         
         if title == "Coffee\n" {
@@ -50,7 +55,6 @@ class UCMainImageView: UIImageView {
         titleLabel.attributedText = attributedString
         titleLabel.textColor = UIColor.white
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-     
         self.addSubview(titleLabel)
        
         NSLayoutConstraint.activate([
@@ -68,15 +72,8 @@ class UCMainImageView: UIImageView {
     
         gradient.colors = [colorTop, colorBottom]
         gradient.locations = [0.5, 0.92]
+        gradient.frame.size = size
 
         layer.addSublayer(gradient)
-        self.gradient = gradient
-        
-        gradient.frame.size = size
      }
-     
-     required init?(coder: NSCoder) {
-         super.init(coder: coder)
-     }
-
 }

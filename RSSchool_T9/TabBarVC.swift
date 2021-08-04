@@ -14,24 +14,20 @@ class TabBarVC: UITabBarController  {
     weak var settingController: SettingsVC?
     
     override func viewDidLoad() {
-        
         let itemsVC = ItemsViewController.init()
         let settingsVC = SettingsVC.init()
         
         itemsController = itemsVC
         settingController = settingsVC
-      
-        let controllers = [itemsVC, settingsVC]
         addTabBarItems(itemsVC: itemsVC, settingsVC: settingsVC)
 
-        self.viewControllers = controllers
-        self.viewControllers = controllers.map {
+        viewControllers =  [itemsVC, settingsVC].map {
             UINavigationController.init(rootViewController: $0)
         }
         
-        itemsVC.navigationController?.setNavigationBarHidden(true, animated: false)
         settingsVC.navigationItem.title = "Settings"
         settingsVC.navigationController?.navigationBar.tintColor = UIColor.init(named: "#FF0000")
+        itemsVC.navigationController?.setNavigationBarHidden(true, animated: false)
         
         UITabBar.appearance().tintColor = UIColor.init(named: "#FF0000")
     }
@@ -39,6 +35,5 @@ class TabBarVC: UITabBarController  {
     private func addTabBarItems(itemsVC : UIViewController, settingsVC: UIViewController) {
         itemsVC.tabBarItem = UITabBarItem.init(title: "Items", image: UIImage.init(systemName: "rectangle.grid.2x2"), tag: 0)
         settingsVC.tabBarItem = UITabBarItem.init(title: "Settings", image: UIImage.init(systemName: "gear"), tag: 1)
-    
     }
 }

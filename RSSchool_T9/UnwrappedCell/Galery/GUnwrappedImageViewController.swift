@@ -10,15 +10,29 @@
 import UIKit
 
 class GUnwrappedImageViewController: UIViewController {
-    var image: UIImage!
-    weak var containerImageView: UIImageView!
-    weak var scrollView: UIScrollView!
-    weak var closeLabel: UCCloseLabel!
+    private weak var scrollView: UIScrollView!
+    private weak var closeLabel: UCCloseLabel!
+    private weak var imageView: UIImageView!
+    private weak var image: UIImage!
+    
+    convenience init(with image: UIImage) {
+        self.init()
+        self.image = image
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.black
 
+        addScrollView()
+        addCloseLabel()
+        addImage()
+        createConstraints()
+    }
+    
+    //MARK: Stuff ↓
+    
+    private func addScrollView() {
         let scroll = UIScrollView.init()
         scroll.minimumZoomScale = 1
         scroll.maximumZoomScale = 3
@@ -27,68 +41,51 @@ class GUnwrappedImageViewController: UIViewController {
         scroll.alwaysBounceHorizontal = false
         scroll.translatesAutoresizingMaskIntoConstraints = false
         scrollView = scroll
-        
         view.addSubview(scroll)
         
-        NSLayoutConstraint.activate([
-            scroll.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor),
-            scroll.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
-            scroll.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor),
-            scroll.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor)
-        ])
         let gesture = UITapGestureRecognizer.init(target: self, action: #selector(disappearCloseLabel))
-      
         scrollView.addGestureRecognizer(gesture)
-        addCloseLabel()
-        addImage()
-        
-      
-       
-    }
-    
-    convenience init(with image: UIImage) {
-        self.init()
-        self.image = image
     }
     
     private func addCloseLabel() {
         let close = UCCloseLabel.init()
-        let gestureForClose = UITapGestureRecognizer.init(target: self, action: #selector(closeDescribing))
-        
-        close.addGestureRecognizer(gestureForClose)
-        view.addSubview(close)
         closeLabel = close
-       
-        NSLayoutConstraint.activate([
-            close.heightAnchor.constraint(equalToConstant: 40.0),
-            close.widthAnchor.constraint(equalToConstant: 40.0),
-            close.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
-            close.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor)
-        ])
-    }
-    
-    @objc private func closeDescribing() {
-        self.dismiss(animated: true, completion: nil)
+        view.addSubview(closeLabel)
+        
+        let gestureForClose = UITapGestureRecognizer.init(target: self, action: #selector(closeDescribing))
+        closeLabel.addGestureRecognizer(gestureForClose)
     }
     
     private func addImage() {
         let image = UIImageView.init(image: image)
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFit
-        containerImageView = image
+        imageView = image
+        scrollView.addSubview(imageView)
+    }
     
-        scrollView.addSubview(image)
-        
+    //MARK: Constraints
+    private func createConstraints() {
         let screenSize = UIScreen.main.bounds.size
-        
         NSLayoutConstraint.activate([
-            image.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-            image.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
-            image.widthAnchor.constraint(equalToConstant: screenSize.width - 16),
-            image.heightAnchor.constraint(equalToConstant: screenSize.height/2 - 16)
+            scrollView.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
+            scrollView.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
+            
+            closeLabel.heightAnchor.constraint(equalToConstant: 40.0),
+            closeLabel.widthAnchor.constraint(equalToConstant: 40.0),
+            closeLabel.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
+            closeLabel.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor),
+            
+            imageView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            imageView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor),
+            imageView.widthAnchor.constraint(equalToConstant: screenSize.width - 16),
+            imageView.heightAnchor.constraint(equalToConstant: screenSize.height/2 - 16)
         ])
     }
     
+    //selector to hide closeLabel
     @objc private func disappearCloseLabel() {
         if (closeLabel.isHidden) {
             closeLabel.isHidden = false
@@ -96,11 +93,16 @@ class GUnwrappedImageViewController: UIViewController {
             closeLabel.isHidden = true
         }
     }
-   
+    
+    //selector for dismis
+    @objc private func closeDescribing() {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
 
+//MARK: subscribing on the UIScrollViewDelegate
 extension GUnwrappedImageViewController : UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        containerImageView
+        imageView
     }
 }

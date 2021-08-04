@@ -10,7 +10,7 @@
 import UIKit
 
 class GViewController: UCViewController {
-    var imageViews = [GImageView]()
+    private var imageViews = [GImageView]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,9 +19,8 @@ class GViewController: UCViewController {
         
     
     private func addImageStackView() {
-        
         for image in dataGallery.images {
-            let view = GImageView.init(image: image, size: sizeImage )
+            let view = GImageView.init(image: image, size: sizeImage ) //sizeImage from super class
             view.delegate = self
             imageViews += [view]
         }
@@ -30,7 +29,6 @@ class GViewController: UCViewController {
         stack.axis = .vertical
         stack.spacing = 20.0
         stack.translatesAutoresizingMaskIntoConstraints = false
-                            
         self.scrollView.addSubview(stack)
         
         NSLayoutConstraint.activate([
@@ -38,10 +36,10 @@ class GViewController: UCViewController {
             stack.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 98),
             stack.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -20),
         ])
-        
     }
 }
 
+//MARK: subscribing on the GImageViewDelegate
 extension GViewController: GImageViewDelegate {
     func toucnImage(_ image: UIImage) {
         let vc = GUnwrappedImageViewController.init(with: image)

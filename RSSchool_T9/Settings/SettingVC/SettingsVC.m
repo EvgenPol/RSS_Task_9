@@ -9,9 +9,9 @@
 
 #import "SettingsVC.h"
 
-
+//MARK: private TableCell for Stroke color
+//with subtitle
 @interface  TableCellForColor : UITableViewCell
-
 @end
 
 @implementation TableCellForColor
@@ -23,7 +23,7 @@
 
 @end
 
-
+//actually a Settings
 @interface SettingsVC ()
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *dataSource;
@@ -67,6 +67,7 @@
     return swc;
 }
 
+//selector
 -(void) touchTimer {
     (_turnedTimer == YES) ? (_turnedTimer = NO) : (_turnedTimer = YES);
 }
@@ -80,23 +81,10 @@
 
 
 
-
-
-
-@interface SettingsVC (KVO)
-
-@end
-
-@implementation SettingsVC (KVO)
-
-
-@end
-
-
 //MARK: subscribe on delegate and datasource for TableView
-
 @interface SettingsVC (ForTableView) <UITableViewDataSource, UITableViewDelegate>
 @end
+
 
 @implementation SettingsVC (ForTableView)
 
@@ -124,6 +112,7 @@
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.dataSource.count;
 }
+
 
 //Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

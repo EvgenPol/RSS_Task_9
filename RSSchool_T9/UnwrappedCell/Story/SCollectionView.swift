@@ -10,9 +10,9 @@
 import UIKit
 
 class SCollectionView: UICollectionView {
-    let data : [CGPath]
-    let color : UIColor
-    let timer : Bool
+    private let data : [CGPath]
+    private let color : UIColor
+    private let timer : Bool
     var widthCollectionAnchor : NSLayoutConstraint!
     
     init (with paths: [CGPath],_ color : UIColor, and timer: Bool) {
@@ -28,6 +28,7 @@ class SCollectionView: UICollectionView {
         layout.sectionInset = UIEdgeInsets.init(top: 0, left: width/6, bottom: 0, right: width/6)
         
         super.init(frame: CGRect.zero, collectionViewLayout: layout)
+        
         showsHorizontalScrollIndicator = false
         delegate = self
         dataSource = self
@@ -39,16 +40,15 @@ class SCollectionView: UICollectionView {
         let widthSpacingLine = (data.count - 1) * 100
         let widthSpaceInset = (width / 6) * 2
         widthCollectionAnchor =  widthAnchor.constraint(equalToConstant: CGFloat(widthItem + widthSpacingLine) + widthSpaceInset)
-        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-   
 }
 
+
+//MARK: subscribing on the delegate and dataSource for UICollectionView
 extension SCollectionView : UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         data.count
@@ -63,11 +63,7 @@ extension SCollectionView : UICollectionViewDelegate, UICollectionViewDataSource
             cell.shapeLayer.strokeEnd = 0.0
             cell.animation()
         }
-    
+        
         return cell
     }
-    
-   
-    
-    
 }

@@ -14,7 +14,7 @@ protocol GImageViewDelegate: AnyObject {
 }
 
 class GImageView: UIView {
-    var image = UIImage.init()
+    private weak var image: UIImage!
     weak var delegate: GImageViewDelegate?
     
     convenience init(image: UIImage, size: CGSize) {
@@ -27,7 +27,6 @@ class GImageView: UIView {
         isUserInteractionEnabled = true
         
         self.image = image
-        
         let imageView = UIImageView.init(image: image)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill

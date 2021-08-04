@@ -44,7 +44,8 @@
     ];
 }
 
-#pragma mark - Table view data source
+
+//MARK: Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return _dataSource.count;
@@ -65,6 +66,7 @@
     return cell;
 }
 
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     _selectedColor = _dataSource[indexPath.row];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -75,5 +77,6 @@
     }];
     timer.tolerance = 0.1;
 }
+
 
 @end

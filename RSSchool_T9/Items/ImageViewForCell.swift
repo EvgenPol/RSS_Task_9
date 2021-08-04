@@ -12,7 +12,10 @@ import UIKit
 class ImageViewForCell: UIImageView {
     private weak var gradient : CAGradientLayer!
     private weak var titleLabel : UILabel!
+    private weak var subtitleLabel : UILabel!
+    
     private var constraintsPortrait : [NSLayoutConstraint] = []
+    
     
     init(_ img: UIImage, _ title: String, _ type: String) {
         super.init(image: img)
@@ -26,8 +29,14 @@ class ImageViewForCell: UIImageView {
         
         addGradiend()
         addLabels(title, type)
+        createConstraints()
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: Stuff ↓
     
     private func addLabels(_ title: String, _ type: String) {
         let titleLabel = UILabel.init()
@@ -44,30 +53,9 @@ class ImageViewForCell: UIImageView {
         subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
         
         self.titleLabel = titleLabel
+        self.subtitleLabel = subtitleLabel
         self.addSubview(titleLabel)
         self.addSubview(subtitleLabel)
-        
-        
-        let titleBottomLandscapeConstrait = titleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -15)
-        titleBottomLandscapeConstrait.priority = UILayoutPriority.init(999)
-        
-        
-        let subtitleBottomLandscapeConstrait = subtitleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -1)
-        subtitleBottomLandscapeConstrait.priority = UILayoutPriority.init(999)
-        
-        constraintsPortrait = [
-            titleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -30),
-            subtitleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
-        ]
-        
-        NSLayoutConstraint.activate([
-            titleBottomLandscapeConstrait,
-            subtitleBottomLandscapeConstrait,
-            titleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10),
-            titleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -15),
-            subtitleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10),
-            subtitleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -15)
-        ])
     }
     
     private func addGradiend() {
@@ -82,6 +70,30 @@ class ImageViewForCell: UIImageView {
         self.gradient = gradient
     }
     
+    //MARK: Constraints
+    private func createConstraints() {
+        let titleBottomLandscapeConstrait = titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15)
+        titleBottomLandscapeConstrait.priority = UILayoutPriority.init(999)
+        
+        let subtitleBottomLandscapeConstrait = subtitleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -1)
+        subtitleBottomLandscapeConstrait.priority = UILayoutPriority.init(999)
+        
+        constraintsPortrait = [
+            titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30),
+            subtitleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+        ]
+        
+        NSLayoutConstraint.activate([
+            titleBottomLandscapeConstrait,
+            subtitleBottomLandscapeConstrait,
+            titleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
+            titleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -15),
+            subtitleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
+            subtitleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -15)
+        ])
+    }
+    
+    //MARK: Response to changing the screen orientation
      func updateOrientation() {
         let height = max(UIScreen.main.bounds.height, UIScreen.main.bounds.width)
         let width = min(UIScreen.main.bounds.height, UIScreen.main.bounds.width)
@@ -97,7 +109,4 @@ class ImageViewForCell: UIImageView {
         }
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 }

@@ -14,52 +14,55 @@ protocol CellForDataDelegate: AnyObject {
 }
 
 class CellForData: UIView {
-    var data: ContentType!
+    let data: ContentType
     weak var delegate: CellForDataDelegate?
-    weak var imageView: ImageViewForCell!
+    private weak var imageView: ImageViewForCell!
     private var constraintsPortrait: [NSLayoutConstraint] = []
     
     static var id = 0
     
-    private func createStuff() {
-        if let data = self.data {
-            switch data {
-            case .gallery(let gallery):
-                let imageView = ImageViewForCell.init(gallery.coverImage, gallery.title, gallery.type)
-                configureImageView(imageView)
-            case .story(let story):
-                let imageView = ImageViewForCell.init(story.coverImage, story.title, story.type)
-                configureImageView(imageView)
-            }
-        }
-    }
-    
-    private func configureImageView(_ imageView: ImageViewForCell) {
-        self.addSubview(imageView)
-        self.imageView = imageView
-        imageView.isUserInteractionEnabled = true
-        
-    }
-        
     init() {
+        data = FillingData.data[CellForData.id]
+        CellForData.id += 1
+        
         super.init(frame: CGRect.zero)
         layer.cornerRadius = 18
         layer.borderWidth = 1
         layer.borderColor = UIColor.black.cgColor
         translatesAutoresizingMaskIntoConstraints = false
         
-        data = FillingData.data[CellForData.id]
-        CellForData.id += 1
-        
         createStuff()
-        createConstraits()
+        createConstraints()
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
+        fatalError("init(coder:) has not been implemented")
     }
     
-    private func createConstraits() {
+    
+    //Creating the cover image, title, type for cell
+    private func createStuff() {
+        
+        func configureImageView(_ imageView: ImageViewForCell) {
+            self.addSubview(imageView)
+            self.imageView = imageView
+            imageView.isUserInteractionEnabled = true
+        } // - Nested function for imageView
+        
+        switch data {
+        
+        case .gallery(let gallery):
+            let imageView = ImageViewForCell.init(gallery.coverImage, gallery.title, gallery.type)
+            configureImageView(imageView)
+            
+        case .story(let story):
+            let imageView = ImageViewForCell.init(story.coverImage, story.title, story.type)
+            configureImageView(imageView)
+        }
+    }
+    
+    //MARK: Constraints
+    private func createConstraints() {
         let screenSize = UIScreen.main.bounds.size
         let screenHeight = max(screenSize.width, screenSize.height)
         let screenWidth = min(screenSize.width, screenSize.height)
@@ -75,29 +78,21 @@ class CellForData: UIView {
         
         let widthPortrait = widthAnchor.constraint(equalToConstant: ((screenHeight / 4) * 0.8) )
         widthPortrait.priority = UILayoutPriority.init(999)
-    
+        
+        constraintsPortrait = [ heightPortrait, widthPortrait ]
+        
         NSLayoutConstraint.activate([
             widthPortrait, heightPortrait, widthLandscape, heightLandscape,
             
-            imageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8),
-            imageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
-            imageView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -8),
-            imageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10)
+            imageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 8),
+            imageView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            imageView.rightAnchor.constraint(equalTo: rightAnchor, constant: -8),
+            imageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
         ])
-        
-        constraintsPortrait = [ heightPortrait, widthPortrait ]
     }
     
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let locationPoint = touches.first?.location(in: self) else { return }
-        let viewPonit = self.imageView.convert(locationPoint, from: self)
-        
-        if self.imageView.point(inside: viewPonit, with: event) {
-            delegate?.touchCell(from: self)
-        }
-    }
     
-        
+    //MARK: Response to changing the screen orientation
     func updateOrientation() {
         if (UIDevice.current.orientation == .portrait) {
             constraintsPortrait.forEach { $0.isActive = true }
@@ -108,5 +103,14 @@ class CellForData: UIView {
     }
     
     
+    //MARK: Response to the touch of the image
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let locationPoint = touches.first?.location(in: self) else { return }
+        let viewPonit = imageView.convert(locationPoint, from: self)
+        
+        if imageView.point(inside: viewPonit, with: event) {
+            delegate?.touchCell(from: self)
+        }
+    }
 }
 
