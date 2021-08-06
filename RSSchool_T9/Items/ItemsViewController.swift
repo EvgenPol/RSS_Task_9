@@ -14,11 +14,6 @@ class ItemsViewController: UIViewController {
     private var arrayStackView: [UIStackView] = []
     private var arrayCellView: [CellForData] = []
     
-    private var stackOneConstraintsPortrait: [NSLayoutConstraint] = []
-    private var stackTwoConstraintsPortrait: [NSLayoutConstraint] = []
-    private var stackOneConstraintsLandscape: [NSLayoutConstraint] = []
-    private var stackTwoConstraintsLandscape: [NSLayoutConstraint] = []
-    
     private var startOrientation = UIDeviceOrientation.unknown
     
     override func viewDidLoad() {
@@ -59,6 +54,7 @@ class ItemsViewController: UIViewController {
         
         for stack in arrayStackView {
             stack.translatesAutoresizingMaskIntoConstraints = false
+            stack.axis = .vertical
             stack.spacing = 30
             self.scrollView.addSubview(stack)
         }
@@ -70,64 +66,22 @@ class ItemsViewController: UIViewController {
             scrollView.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor),
             scrollView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
             scrollView.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor)
-        ])
-    
-        stackOneConstraintsPortrait = [
+            scrollView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
+            
             arrayStackView[0].leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor),
             arrayStackView[0].topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 8.0),
-            arrayStackView[0].bottomAnchor.constraint(equalTo: scrollView!.bottomAnchor, constant: -50.0)
-        ]
-        stackTwoConstraintsPortrait = [
+            arrayStackView[0].bottomAnchor.constraint(equalTo: scrollView!.bottomAnchor, constant: -50.0),
+            
             arrayStackView[1].topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 8.0),
             arrayStackView[1].rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor),
             arrayStackView[1].bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -50.0)
-        ]
-        stackOneConstraintsLandscape = [
-            arrayStackView[0].leftAnchor.constraint(equalTo: scrollView.leftAnchor),
-            arrayStackView[0].topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
-            arrayStackView[0].rightAnchor.constraint(equalTo: scrollView.rightAnchor),
-            
-        ]
-        stackTwoConstraintsLandscape = [
-            arrayStackView[1].leftAnchor.constraint(equalTo: scrollView.leftAnchor),
-            arrayStackView[1].bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
-            arrayStackView[1].rightAnchor.constraint(equalTo: scrollView.rightAnchor),
-        ]
+        ])
     }
     
     //MARK: response to changing the screen orientation ↓
     
-    private func updateOrientation() {
-        if UIDevice.current.orientation == .portrait {
-            
-            stackOneConstraintsLandscape.forEach { $0.isActive = false }
-            stackTwoConstraintsLandscape.forEach { $0.isActive = false }
-            
-            arrayStackView.forEach { $0.axis = .vertical }
-            scrollView.showsVerticalScrollIndicator = true
-            scrollView.showsHorizontalScrollIndicator = false
-            
-            stackOneConstraintsPortrait.forEach { $0.isActive = true }
-            stackTwoConstraintsPortrait.forEach { $0.isActive = true }
-
-        } else {
-            
-            stackOneConstraintsPortrait.forEach { $0.isActive = false }
-            stackTwoConstraintsPortrait.forEach { $0.isActive = false }
-            
-            arrayStackView.forEach { $0.axis = .horizontal }
-            scrollView.showsVerticalScrollIndicator = false
-            scrollView.showsHorizontalScrollIndicator = true
-            
-            stackOneConstraintsLandscape.forEach { $0.isActive = true }
-            stackTwoConstraintsLandscape.forEach { $0.isActive = true }
-        }
-    }
-    
     override func viewWillLayoutSubviews() {
         arrayCellView.forEach { $0.updateOrientation() }
-        updateOrientation()
         startOrientation = UIDevice.current.orientation
     }
 }

@@ -65,12 +65,11 @@ class CellForData: UIView {
     private func createConstraints() {
         let screenSize = UIScreen.main.bounds.size
         let screenHeight = max(screenSize.width, screenSize.height)
-        let screenWidth = min(screenSize.width, screenSize.height)
     
-        let heightLandscape =  heightAnchor.constraint(equalToConstant: screenWidth / 2.5)
+        let heightLandscape =  heightAnchor.constraint(equalToConstant: screenHeight / 3)
         heightLandscape.priority = UILayoutPriority.init(998)
         
-        let widthLandscape = widthAnchor.constraint(equalToConstant: (screenWidth / 2.5))
+        let widthLandscape = widthAnchor.constraint(equalToConstant: (screenHeight / 3) * 0.8)
         widthLandscape.priority = UILayoutPriority.init(998)
         
         let heightPortrait =  heightAnchor.constraint(equalToConstant: screenHeight / 4)

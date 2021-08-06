@@ -13,10 +13,7 @@ class ImageViewForCell: UIImageView {
     private weak var gradient : CAGradientLayer!
     private weak var titleLabel : UILabel!
     private weak var subtitleLabel : UILabel!
-    
-    private var constraintsPortrait : [NSLayoutConstraint] = []
-    
-    
+        
     init(_ img: UIImage, _ title: String, _ type: String) {
         super.init(image: img)
         translatesAutoresizingMaskIntoConstraints = false
@@ -72,41 +69,25 @@ class ImageViewForCell: UIImageView {
     
     //MARK: Constraints
     private func createConstraints() {
-        let titleBottomLandscapeConstrait = titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15)
-        titleBottomLandscapeConstrait.priority = UILayoutPriority.init(999)
-        
-        let subtitleBottomLandscapeConstrait = subtitleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -1)
-        subtitleBottomLandscapeConstrait.priority = UILayoutPriority.init(999)
-        
-        constraintsPortrait = [
-            titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30),
-            subtitleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
-        ]
-        
         NSLayoutConstraint.activate([
-            titleBottomLandscapeConstrait,
-            subtitleBottomLandscapeConstrait,
             titleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
             titleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -15),
+            titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30),
+            
             subtitleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
-            subtitleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -15)
+            subtitleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -15),
+            subtitleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
         ])
     }
     
     //MARK: Response to changing the screen orientation
      func updateOrientation() {
         let height = max(UIScreen.main.bounds.height, UIScreen.main.bounds.width)
-        let width = min(UIScreen.main.bounds.height, UIScreen.main.bounds.width)
         
         if UIDevice.current.orientation.isPortrait {
-            constraintsPortrait.forEach { $0.isActive = true }
             gradient.frame.size = CGSize.init(width: (height/4) * 0.8, height: height / 4)
-            titleLabel.font = UIFont.init(name: "Rockwell", size: 16)
         } else {
-            constraintsPortrait.forEach { $0.isActive = false }
-            gradient.frame.size = CGSize.init(width: width / 2.5, height: width / 2.5)
-            titleLabel.font = UIFont.init(name: "Rockwell", size: 14)
+            gradient.frame.size = CGSize.init(width: height / 3 * 0.8, height: height / 3)
         }
     }
-    
 }
